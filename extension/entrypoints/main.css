@@ -1,3 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("/fonts/IBM_Plex_Mono/IBMPlexMono-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  html {
+    @apply text-zinc-100 font-theme-inter;
+  }
+
+  * {
+    @apply m-0 p-0 box-border;
+  }
+}
+
+@layer utilities {
+  .bg-theme-gradient {
+    background: linear-gradient(
+      135deg,
+      #0e0e0e 0%,
+      #2a2a2a 22%,
+      #4a4a4a 45%,
+      #3b3a4d 65%,
+      #161430 100%
+    );
+
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-radial-gradient(
+        circle at 0 0,
+        rgba(255, 255, 255, 0.015) 0,
+        rgba(255, 255, 255, 0.015) 1px,
+        rgba(0, 0, 0, 0.015) 2px
+      );
+      mix-blend-mode: overlay;
+      opacity: 0.35;
+    }
+  }
+}

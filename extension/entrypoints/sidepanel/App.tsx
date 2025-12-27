@@ -1,16 +1,28 @@
+import { HomePage } from "@/pages";
+import { Dispatch, SetStateAction, useState } from "react";
+
+export enum ApplicationPage {
+  HOME = "home",
+}
+
+export function renderPage(
+  currentPage: ApplicationPage,
+  setCurrentPage: Dispatch<SetStateAction<ApplicationPage>>
+) {
+  switch (currentPage) {
+    case ApplicationPage.HOME:
+      return <HomePage setCurrentPage={setCurrentPage} />;
+  }
+}
+
 function App() {
-  const handleClick = () => {
-    console.log("Button clicked!");
-  };
+  const [currentPage, setCurrentPage] = useState<ApplicationPage>(
+    ApplicationPage.HOME
+  );
 
   return (
-    <div className="p-8">
-      <button
-        onClick={handleClick}
-        className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-md hover:shadow-lg"
-      >
-        Click Me
-      </button>
+    <div className="h-full w-full bg-theme-gradient">
+      {renderPage(currentPage, setCurrentPage)}
     </div>
   );
 }

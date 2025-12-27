@@ -1,5 +1,5 @@
 {
-  "name": "KnowIdea Gmail Plugin",
+  "name": "Know Idea Gmail Plugin",
   "description": "manifest.json description",
   "private": true,
   "version": "0.0.0",
@@ -16,6 +16,7 @@
     "tailwind:watch": "npx tailwindcss -i ./entrypoints/popup/style.css -o ./entrypoints/popup/App.css --watch"
   },
   "dependencies": {
+    "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   },
