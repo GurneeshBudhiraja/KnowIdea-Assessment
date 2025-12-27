@@ -9,7 +9,7 @@ export default defineConfig({
   },
   manifest: {
     action: {
-      default_title: 'Know Idea Gmail Plugin',
+      default_title: 'KnowIdea Gmail Plugin',
     },
     icons: {
       "16": "./icon/icon.png"

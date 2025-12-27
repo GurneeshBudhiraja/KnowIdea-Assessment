@@ -58,4 +58,58 @@
       opacity: 0.35;
     }
   }
+
+  .scrollbar-auto {
+    overflow-y: auto;
+    scrollbar-gutter: auto;
+  }
+
+  .scrollbar-auto {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+
+  .scrollbar-auto::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-auto::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  .scrollbar-auto::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .scrollbar-auto-textarea {
+    overflow-y: auto;
+    scrollbar-gutter: auto;
+  }
+
+  .scrollbar-auto-textarea {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  }
+
+  .scrollbar-auto-textarea::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-auto-textarea::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-auto-textarea::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+  }
+
+  .scrollbar-auto-textarea::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
 }

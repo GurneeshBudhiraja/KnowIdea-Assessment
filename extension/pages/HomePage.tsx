@@ -12,6 +12,7 @@ import {
   Unlink,
 } from "lucide-react";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
+import ChatInterface from "./ChatInterface.tsx";
 
 declare const browser: any;
 
@@ -379,11 +380,11 @@ function HomePage({
       {!isLoading && !isUserLoggedIn ? (
         <div className="h-full w-full overflow-hidden relative">
           <header className="absolute top-0 left-0 ">
-            <img src="/logo.png" alt="Know Idea Logo" className="w-auto h-10" />
+            <img src="/logo.png" alt="KnowIdea Logo" className="w-auto h-10" />
           </header>
           <div className="h-full w-full flex flex-col items-center justify-center gap-4">
             <p className="text-center max-w-md text-xl font-semibold">
-              Please sign in with your Know Idea account to continue.
+              Please sign in with your KnowIdea account to continue.
             </p>
             <button
               onClick={handleLogin}
@@ -402,16 +403,16 @@ function HomePage({
                 <LogIn className="w-4 h-4" />
               )}
               <span>
-                {isUserLoggingIn ? "Signing in..." : "Sign in with Know Idea"}
+                {isUserLoggingIn ? "Signing in..." : "Sign in with KnowIdea"}
               </span>
             </button>
           </div>
         </div>
       ) : (
-        <div className="h-full w-full flex flex-col items-center justify-center gap-4">
+        <div className="h-full w-full flex flex-col">
           {!isOnGmailCompose ? (
-            <>
-              <Mail className="w-16 h-16 text-zinc-400" />
+            <div className="flex-1 flex flex-col items-center justify-center gap-4">
+              <Mail className="w-20 aspect-square text-zinc-400" size={40} />
               <p className="text-center max-w-md text-lg font-medium">
                 Compose a new email to get started
               </p>
@@ -422,12 +423,12 @@ function HomePage({
                 <Mail className="w-4 h-4" />
                 <span className="font-medium text-sm">Open Gmail</span>
               </button>
-            </>
-          ) : emailOpened ? (
-            <div className="text-center">
-              <p className="text-xl font-semibold mb-2">New email opened</p>
-              <p className="text-zinc-400">You're ready to compose!</p>
             </div>
+          ) : emailOpened ? (
+            <ChatInterface
+              appConnectors={appConnnectors}
+              onToggleConnector={handleToggleConnector}
+            />
           ) : null}
         </div>
       )}
