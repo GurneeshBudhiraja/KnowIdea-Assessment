@@ -2,7 +2,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       PORT: string;
-      OPENAI_API_KEY: string;
+      GEMINI_API_KEY: string;
     }
   }
 }

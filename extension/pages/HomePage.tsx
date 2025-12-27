@@ -200,44 +200,40 @@ function HomePage({
     let updatedConnectors: AppConnector[];
 
     if (existingConnector) {
-      // Toggle the connection status
+      // toggle the connection status
       if (existingConnector.isConnected) {
-        // Disconnect - remove from array
         updatedConnectors = appConnnectors.filter(
           (c) => c.name !== connectorType
         );
       } else {
-        // Connect - update isConnected to true
         updatedConnectors = appConnnectors.map((c) =>
           c.name === connectorType ? { ...c, isConnected: true } : c
         );
       }
     } else {
-      // Add new connector
       updatedConnectors = [
         ...appConnnectors,
         { name: connectorType, isConnected: true },
       ];
     }
 
-    // Update local storage
     window.localStorage.setItem(
       EXTENSION_LOCAL_STORAGE_KEYS.APP_CONNECTORS,
       JSON.stringify(updatedConnectors)
     );
 
-    // Update state
+    // update local states
     setAppConnnectors(updatedConnectors);
     setLoadingConnector(null);
   };
 
-  // Check if a connector is connected
+  // checks if a connector is connected
   const isConnectorConnected = (connectorType: AppConnectorType): boolean => {
     const connector = appConnnectors.find((c) => c.name === connectorType);
     return connector?.isConnected ?? false;
   };
 
-  // Settings Modal Component
+  // settings modal component
   function SettingsModal() {
     if (!isSettingsOpen) return null;
 
@@ -338,7 +334,7 @@ function HomePage({
 
   return (
     <div className="h-full w-full p-4 relative">
-      {/* Settings Modal */}
+      {/* settings modal */}
       <SettingsModal />
 
       {isUserLoggedIn && appConnnectors.length === 0 && (
