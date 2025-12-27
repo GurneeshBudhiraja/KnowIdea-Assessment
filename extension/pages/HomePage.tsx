@@ -1,9 +1,7 @@
-import { EXTENSION_LOCAL_STORAGE_KEYS } from "@/constants";
+import { EXTENSION_LOCAL_STORAGE_KEYS, GMAIL_COMPOSE_URL } from "@/constants";
 import { ApplicationPage } from "@/entrypoints/sidepanel/App";
 import { Loader2, LogIn, LogOut, Mail, Settings } from "lucide-react";
 import React, { Dispatch, SetStateAction, useState, useEffect } from "react";
-
-const GMAIL_COMPOSE_URL = "https://mail.google.com/mail/u/0/#inbox?compose=new";
 
 declare const browser: any;
 
@@ -36,7 +34,7 @@ function HomePage({
         });
         if (tabs[0]?.url) {
           const currentUrl = tabs[0].url;
-          const isOnCorrectUrl = currentUrl === GMAIL_COMPOSE_URL;
+          const isOnCorrectUrl = currentUrl.startsWith(GMAIL_COMPOSE_URL);
           setIsOnGmailCompose(isOnCorrectUrl);
 
           if (isOnCorrectUrl) {
@@ -54,7 +52,7 @@ function HomePage({
 
     // tab updates
     const handleTabUpdate = (tabId: number, changeInfo: any, tab: any) => {
-      if (changeInfo.url && tab.url === GMAIL_COMPOSE_URL) {
+      if (changeInfo.url && tab.url?.startsWith(GMAIL_COMPOSE_URL)) {
         setIsOnGmailCompose(true);
         setEmailOpened(true);
       } else if (changeInfo.url) {
@@ -119,22 +117,40 @@ function HomePage({
         active: true,
         currentWindow: true,
       });
-      if (tabs[0]?.id) {
-        await browser.tabs.update(tabs[0].id, { url: GMAIL_COMPOSE_URL });
-      } else {
-        // If no active tab, create a new one
+      const currentTab = tabs[0];
+
+      if (!currentTab?.url) {
+        // creates a new gmail tab and redirects to it when there is no URL in the current tab
         await browser.tabs.create({ url: GMAIL_COMPOSE_URL });
+        return;
       }
+
+      const isOnGmail = currentTab.url.startsWith("https://mail.google.com/");
+
+      if (isOnGmail) {
+        // updates the url in the current tab itself when the user is on gmail
+        await browser.tabs.update(currentTab.id, { url: GMAIL_COMPOSE_URL });
+        return;
+      }
+
+      // creates a new gmail tab and redirects to it when the user is not on gmail and is on a different website
+      await browser.tabs.create({ url: GMAIL_COMPOSE_URL });
     } catch (error) {
       console.log("Error redirecting to Gmail: ", (error as Error).message);
     }
+  };
+
+  // handles opening the settings page
+  const handleOpenSettings = () => {
+    // TODO: implement the settings page to get the user's preferences on whether to get the answers in the side panel or in the email body itself
+    console.log("Opening settings...");
   };
 
   return (
     <div className="h-full w-full p-4 relative">
       {isUserLoggedIn && (
         <header className="flex items-center justify-between absolute top-0 right-0 p-4 w-full">
-          <button onClick={}>
+          <button onClick={handleOpenSettings}>
             <Settings size={18} />
           </button>
           <button

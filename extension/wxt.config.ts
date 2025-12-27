@@ -4,6 +4,9 @@ import { defineConfig } from 'wxt';
 export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   outDir: "dist/",
+  webExt: {
+    disabled: true,
+  },
   manifest: {
     action: {
       default_title: 'Know Idea Gmail Plugin',
