@@ -1,7 +1,4 @@
 # KnowIdea Gmail Plugin
-
-A Chrome extension that integrates AI-powered email composition assistance directly into Gmail.
-
 ---
 
 ## 📁 Project Structure
